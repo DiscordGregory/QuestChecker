@@ -868,7 +868,7 @@ function ToolTipsOnly(f)
 	if f == vQC_WhereIcon then msg = "Print out your location (Zone ID and XY Coords)" end
 	if f == vQC_WBMainRefresh then msg = "Click here to Refresh World Boss List..." end 
 	if f == vQC_WBMapB then msg = vQC_WBMapB:GetText() end
-	if f == vQC_MiniMap then msg = vQC_AppTitle.."\n\n"..Colors(2,"\/qc ?").." for more options" end
+	-- if f == vQC_MiniMap then msg = vQC_AppTitle.."\n\n"..Colors(2,"\/qc ?").." for more options" end
 	if f == vQC_MiniQ then msg = "Quest ID: "..Colors(2,vQC_MiniQ.Text:GetText()).."\n\nClick to check Quest." end
 	if f == vQC_MiniW then msg = "Quest ID: "..Colors(2,vQC_MiniW.Text:GetText()).."\n\nClick to check Quest." end
 	if f == vQC_MapPinIcon then msg = "Pin coord, |cFFFF00FF"..vQC_T_XY.Text:GetText().."|r, to the map" end
@@ -965,21 +965,21 @@ end
 ------------------------------------------------------------------------
 -- Mini Map Position when Dragging
 ------------------------------------------------------------------------
-function UpdateMiniMapButton(arg)
-    local Xpoa, Ypoa = GetCursorPosition()
-    local Xmin, Ymin = Minimap:GetLeft(), Minimap:GetBottom()
-    Xpoa = Xmin - Xpoa / Minimap:GetEffectiveScale() + 70
-    Ypoa = Ypoa / Minimap:GetEffectiveScale() - Ymin - 70
-    myIconPos = math.deg(math.atan2(Ypoa, Xpoa))
-	if arg == 1 then
-		vQC_MiniMap:ClearAllPoints()
-		vQC_MiniMap:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", 52 - (80 * cos(myIconPos)), (80 * sin(myIconPos)) - 52)
-	end
-	if arg == 2 then
-		vQC_MiniMapB:ClearAllPoints()
-		vQC_MiniMapB:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", 52 - (80 * cos(myIconPos)), (80 * sin(myIconPos)) - 52)
-	end
-end
+-- function UpdateMiniMapButton(arg)
+    -- local Xpoa, Ypoa = GetCursorPosition()
+    -- local Xmin, Ymin = Minimap:GetLeft(), Minimap:GetBottom()
+    -- Xpoa = Xmin - Xpoa / Minimap:GetEffectiveScale() + 70
+    -- Ypoa = Ypoa / Minimap:GetEffectiveScale() - Ymin - 70
+    -- myIconPos = math.deg(math.atan2(Ypoa, Xpoa))
+	-- if arg == 1 then
+		-- vQC_MiniMap:ClearAllPoints()
+		-- vQC_MiniMap:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", 52 - (80 * cos(myIconPos)), (80 * sin(myIconPos)) - 52)
+	-- end
+	-- if arg == 2 then
+		-- vQC_MiniMapB:ClearAllPoints()
+		-- vQC_MiniMapB:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", 52 - (80 * cos(myIconPos)), (80 * sin(myIconPos)) - 52)
+	-- end
+-- end
 ------------------------------------------------------------------------
 -- Best uiMapID for Player
 ------------------------------------------------------------------------
@@ -1008,45 +1008,45 @@ end
 ------------------------------------------------------------------------
 -- Mini Map Button
 ------------------------------------------------------------------------
-	local vQC_MiniMap = CreateFrame("Button", "vQC_MiniMap", Minimap)
-		vQC_MiniMap:SetFrameLevel(8)
-		vQC_MiniMap:SetSize(28, 28)
-		vQC_MiniMap:SetNormalTexture("Interface\\TARGETINGFRAME\\PortraitQuestBadge")
-		vQC_MiniMap:ClearAllPoints()
-		vQC_MiniMap:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", -10, -10)
-		vQC_MiniMap:SetMovable(true)
-		vQC_MiniMap:RegisterForDrag("LeftButton")
-			vQC_MiniMap:SetScript("OnClick", function() WatchQLogAct(0) end)
-			vQC_MiniMap:SetScript("OnEnter", function() ToolTipsOnly(vQC_MiniMap) end)
-			vQC_MiniMap:SetScript("OnLeave", function() ToolTipsOnly(0) end)
-			vQC_MiniMap:SetScript("OnDragStart", function()
-				vQC_MiniMap:StartMoving()
-				vQC_MiniMap:SetScript("OnUpdate", UpdateMiniMapButton(1))
-			end)
-			vQC_MiniMap:SetScript("OnDragStop", function()
-				vQC_MiniMap:StopMovingOrSizing()
-				vQC_MiniMap:SetScript("OnUpdate", nil)
-				UpdateMiniMapButton(1)
-			end)
-	local vQC_MiniMapB = CreateFrame("Button", "vQC_MiniMapB", Minimap)
-		vQC_MiniMapB:SetFrameLevel(8)
-		vQC_MiniMapB:SetSize(30, 30)
-		vQC_MiniMapB:SetNormalTexture("Interface\\ENCOUNTERJOURNAL\\UI-EncounterJournalTextures")
-		vQC_MiniMapB:GetNormalTexture():SetTexCoord(0.898, 0.269, 0.898, 0.322, 1, 0.269, 1, 0.322)
-		vQC_MiniMapB:ClearAllPoints()
-		vQC_MiniMapB:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", -15, 12)
-		vQC_MiniMapB:SetMovable(true)
-		vQC_MiniMapB:RegisterForDrag("LeftButton")
-			vQC_MiniMapB:SetScript("OnClick", function() WorldBossCheck(1) end)
-			vQC_MiniMapB:SetScript("OnDragStart", function()
-				vQC_MiniMapB:StartMoving()
-				vQC_MiniMapB:SetScript("OnUpdate", UpdateMiniMapButton(2))
-			end)
-			vQC_MiniMapB:SetScript("OnDragStop", function()
-				vQC_MiniMapB:StopMovingOrSizing()
-				vQC_MiniMapB:SetScript("OnUpdate", nil)
-				UpdateMiniMapButton(2)
-			end)
+	-- local vQC_MiniMap = CreateFrame("Button", "vQC_MiniMap", Minimap)
+		-- vQC_MiniMap:SetFrameLevel(8)
+		-- vQC_MiniMap:SetSize(28, 28)
+		-- vQC_MiniMap:SetNormalTexture("Interface\\TARGETINGFRAME\\PortraitQuestBadge")
+		-- vQC_MiniMap:ClearAllPoints()
+		-- vQC_MiniMap:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", -10, -10)
+		-- vQC_MiniMap:SetMovable(true)
+		-- vQC_MiniMap:RegisterForDrag("LeftButton")
+			-- vQC_MiniMap:SetScript("OnClick", function() WatchQLogAct(0) end)
+			-- vQC_MiniMap:SetScript("OnEnter", function() ToolTipsOnly(vQC_MiniMap) end)
+			-- vQC_MiniMap:SetScript("OnLeave", function() ToolTipsOnly(0) end)
+			-- vQC_MiniMap:SetScript("OnDragStart", function()
+				-- vQC_MiniMap:StartMoving()
+				-- vQC_MiniMap:SetScript("OnUpdate", UpdateMiniMapButton(1))
+			-- end)
+			-- vQC_MiniMap:SetScript("OnDragStop", function()
+				-- vQC_MiniMap:StopMovingOrSizing()
+				-- vQC_MiniMap:SetScript("OnUpdate", nil)
+				-- UpdateMiniMapButton(1)
+			-- end)
+	-- local vQC_MiniMapB = CreateFrame("Button", "vQC_MiniMapB", Minimap)
+		-- vQC_MiniMapB:SetFrameLevel(8)
+		-- vQC_MiniMapB:SetSize(30, 30)
+		-- vQC_MiniMapB:SetNormalTexture("Interface\\ENCOUNTERJOURNAL\\UI-EncounterJournalTextures")
+		-- vQC_MiniMapB:GetNormalTexture():SetTexCoord(0.898, 0.269, 0.898, 0.322, 1, 0.269, 1, 0.322)
+		-- vQC_MiniMapB:ClearAllPoints()
+		-- vQC_MiniMapB:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", -15, 12)
+		-- vQC_MiniMapB:SetMovable(true)
+		-- vQC_MiniMapB:RegisterForDrag("LeftButton")
+			-- vQC_MiniMapB:SetScript("OnClick", function() WorldBossCheck(1) end)
+			-- vQC_MiniMapB:SetScript("OnDragStart", function()
+				-- vQC_MiniMapB:StartMoving()
+				-- vQC_MiniMapB:SetScript("OnUpdate", UpdateMiniMapButton(2))
+			-- end)
+			-- vQC_MiniMapB:SetScript("OnDragStop", function()
+				-- vQC_MiniMapB:StopMovingOrSizing()
+				-- vQC_MiniMapB:SetScript("OnUpdate", nil)
+				-- UpdateMiniMapButton(2)
+			-- end)
 
 ------------------------------------------------------------------------
 -- Mini Frame for Quest Log/World Frame
@@ -1643,3 +1643,22 @@ vQC_OnUpdate:SetScript("OnEvent", function(self, event, ...)
 	
 	if DEBUG then DeOutput("Event: "..event) end
 end)
+
+------------------------------------------------------------------------
+-- Begin Greg Code
+------------------------------------------------------------------------
+vQCDB = {}
+local vQCLDB = LibStub("LibDataBroker-1.1"):NewDataObject("QuestChecker", {
+	type = "data source",
+	text = "QuestChecker",
+	icon = [[Interface\TARGETINGFRAME\PortraitQuestBadge]],
+	OnClick = function(_, button)
+		if (button == "LeftButton") then
+			WatchQLogAct(0)
+		elseif (button == "RightButton") then
+			WorldBossCheck(1)
+		end
+	end,
+})
+local icon = LibStub("LibDBIcon-1.0")
+icon:Register("QuestChecker", vQCLDB, vQCDB.minimap)
